@@ -1,31 +1,14 @@
-// UI
-let rock = document.getElementById('rock');
-let paper = document.getElementById('paper');
-let scissors = document.getElementById('scissors');
-
-
-// these now corrosponde to the correct buttons, but I wonder if there is a easier way to bundle these up
-// I need to incorporate these into playPlay
-rock.addEventListener('click', function(){
-  console.log('rock clicked');
-});
-paper.addEventListener('click', function(){
-  console.log('paper clicked');
-});
-scissors.addEventListener('click', function(){
-  console.log('scissors clicked');
-});
-
-
-
-
-
-
-
-
-
-// Original Game Logic
-let playerScore = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerScore = 0;
 let computerScore = 0;
 
 // computer select function
@@ -40,11 +23,9 @@ function computerPlay() {
 
 
 // player select function
-
 function playerPlay() {
 
-  const input = prompt("Please enter 'rock', 'paper' or 'scissors'");
-  // take out input and figure out a way to replace it with what buttons are clicked
+  const input = prompt('Please enter input');
 
   const option = input.toLowerCase();
 
@@ -103,8 +84,8 @@ function playRound(playerSelection, computerSelection) {
 // game
 
 function game() {
-// for (i = 0; i <= 5; i++) { REMOVED THIS FOR NOW
-  {    var playerSelection = playerPlay();
+for (i = 0; i <= 5; i++) {
+    var playerSelection = playerPlay();
     var computerSelection = computerPlay();
     playRound(playerSelection, computerSelection);
     console.log('Computer: ' + computerSelection);
@@ -118,3 +99,6 @@ console.log('Final Computer: ' + computerScore);
 }
 
 game();
+    </script>
+</body>
+</html>
