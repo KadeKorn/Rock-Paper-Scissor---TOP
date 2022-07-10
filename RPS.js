@@ -1,120 +1,171 @@
-// UI
-let rock = document.getElementById('rock');
-let paper = document.getElementById('paper');
-let scissors = document.getElementById('scissors');
+let computerSelection;
+let playerSelection;
+let computerPoints = 0;
+let playerPoints = 0;
 
-
-// these now corrosponde to the correct buttons, but I wonder if there is a easier way to bundle these up
-// I need to incorporate these into playPlay
-rock.addEventListener('click', function(){
-  console.log('rock clicked');
-});
-paper.addEventListener('click', function(){
-  console.log('paper clicked');
-});
-scissors.addEventListener('click', function(){
-  console.log('scissors clicked');
-});
-
-
-
-
-
-
-
-
-
-// Original Game Logic
-let playerScore = 0;
-let computerScore = 0;
-
-// computer select function
-function computerPlay() {
-
-  const option = ['rock', 'paper', 'scissors'];
-
-  let random = Math.floor(Math.random() * 3);
-
-  return option[random];
-}
-
-
-// player select function
-
-function playerPlay() {
-
-  const input = prompt("Please enter 'rock', 'paper' or 'scissors'");
-  // take out input and figure out a way to replace it with what buttons are clicked
-
-  const option = input.toLowerCase();
-
-  return option;
+function computerPlay(){
+    let computerChoices = ["rock", "paper", "scissors"];
+    computerSelection = computerChoices[Math.floor(Math.random()*computerChoices.length)];
 }
 
 
 
 
-// play 1 single round
-function playRound(playerSelection, computerSelection) {
-
-  if (playerSelection === computerSelection) {
-    return 'It is a tie';
-  }
-
-
-  if (playerSelection === 'rock') {
-
-    if (computerSelection === 'scissors') {
-      playerScore++;
-      return 'Player wins with rock';
-    } else if (computerSelection === 'paper') {
-      computerScore++;
-      return 'Computer wins with paper'
+function playRound(){
+    if (computerSelection === playerSelection) {
+        tieRoundAudio.play();
+        narratorText.innerText = "That's a Tie.";
+        checkWinner();
     }
-  }
-
-  if (playerSelection === 'paper') {
-
-    if (computerSelection === 'rock') {
-      playerScore++;
-      return 'Player wins with paper';
-    } else if (computerSelection === 'scissors') {
-      computerScore++;
-      return 'Computer wins with scissors';
+    else if (computerSelection === "rock" && playerSelection === "scissors"){
+        lostRoundAudio.play();
+        narratorText.innerText = "You lost.\nRock beats scissors.\nLets try again.";
+        ++computerPoints;  
+        checkWinner();
     }
-  }
-
-  if (playerSelection === 'scissors') {
-
-    if (computerSelection === "paper") {
-      playerScore++;
-      return 'Player wins with scissors';
-    } else if (computerSelection === 'rock') {
-      computerScore++;
-      return 'Computer wins with rock';
+    else if (computerSelection === "rock" && playerSelection === "paper"){
+        wonRoundAudio.play();
+        narratorText.innerText = "Easy win!\nPaper beats rock.\nLet's go again!";
+        ++playerPoints;  
+        checkWinner();
     }
-  }
-
+    else if (computerSelection === "paper" && playerSelection === "scissors"){
+        wonRoundAudio.play();
+        narratorText.innerText = "Your win!\nScissors beat paper.";
+        ++playerPoints;  
+        checkWinner();
+    }
+    else if (computerSelection === "paper" && playerSelection === "rock"){
+        lostRoundAudio.play();
+        narratorText.innerText = "Ouch, that's a loss.\n Paper beats rock\nGive it another try.";
+        ++computerPoints;
+        checkWinner();  
+    }
+    else if (computerSelection === "scissors" && playerSelection === "paper"){
+        lostRoundAudio.play();
+        narratorText.innerText = "You lose...\nScissors beat paper\nLet's go again.";
+        ++computerPoints;
+        checkWinner();  
+    }
+    else if (computerSelection === "scissors" && playerSelection === "rock"){
+        wonRoundAudio.play();
+        narratorText.innerText = "SMASH! Rock beats scissors.\nWell done!";
+        ++playerPoints; 
+        checkWinner(); 
+    }
+    else {
+        narratorText.innerText = "Hmmm something went wrong.";
+        checkWinner();
+    }
+    
 }
 
-// console.log(playRound(playerSelection, computerSelection));
-
-
-// game
-
-function game() {
-// for (i = 0; i <= 5; i++) { REMOVED THIS FOR NOW
-  {    var playerSelection = playerPlay();
-    var computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
-    console.log('Computer: ' + computerSelection);
-    console.log('Player: ' + playerSelection);
-    console.log('Player: ' + playerScore);
-    console.log('Computer: ' + computerScore);
-}
-console.log('Final Player: ' + playerScore);
-console.log('Final Computer: ' + computerScore);
-
+function checkWinner(){
+    if (playerPoints < 5 && computerPoints < 5){
+    }else{
+        declareWinner();
+        playerPoints = 0;
+        computerPoints = 0;
+    }  
 }
 
-game();
+function declareWinner(){
+    if (playerPoints===5){
+        narratorText.innerText = "Yay! You won the game!!!\nLet's play another one!";
+        wonGameAudio.play();
+    } else if (computerPoints===5){
+        narratorText.innerText = "Sorry, it seems that you lost the game...\nLet's play another one!";
+        lostGameAudio.play();
+    }
+}
+
+
+function updateScore(){
+    score.innerText = `SCORE: ${playerPoints} / ${computerPoints}`;
+}
+
+// Event listeners
+
+const rockButton = document.querySelector("#rock-btn");
+rockButton.addEventListener("click", function(){
+    computerPlay();
+    playerSelection = "rock";
+    playRound();
+    updateScore();
+});
+
+const paperButton = document.querySelector("#paper-btn");
+paperButton.addEventListener("click", function(){
+    computerPlay();
+    playerSelection = "paper";
+    playRound();
+    updateScore();
+});
+
+const scissorsButton = document.querySelector("#scissors-btn");
+scissorsButton.addEventListener("click", function(){
+    computerPlay();
+    playerSelection = "scissors";
+    playRound();
+    updateScore();
+});
+
+const score = document.querySelector('#score');
+updateScore();
+
+const narratorText = document.querySelector(".narrator-text");
+
+
+// ANIMATION
+
+const images = document.querySelectorAll(".fist-img");
+const leftFist = images.item(0);
+const rightFist = images.item(1);
+
+rockButton.addEventListener("click", function(){
+   revealLeft();
+   revealRight();
+})
+
+paperButton.addEventListener("click", function(){
+    revealLeft();
+    revealRight();
+ })
+
+ scissorsButton.addEventListener("click", function(){
+    revealLeft();
+    revealRight();
+ })
+
+
+function revealLeft(){
+    if (playerSelection === "rock"){
+        leftFist.src = "images/rock.png";
+    } else if (playerSelection === "paper"){
+        leftFist.src = "images/paper.png";
+    } else if (playerSelection === "scissors"){
+        leftFist.src = "images/scissors.png";
+    } else {
+        console.log("ERROR")
+    }
+}
+
+function revealRight(){
+    if (computerSelection === "rock"){
+        rightFist.src = "images/rock-inv.png";
+    } else if (computerSelection === "paper"){
+        rightFist.src = "images/paper-inv.png";
+    } else if (computerSelection === "scissors"){
+        rightFist.src = "images/scissors-inv.png";
+    } else {
+        console.log("ERROR")
+    }
+}
+
+// AUDIO
+
+const wonGameAudio = document.querySelector("#won-game");
+const lostGameAudio = document.querySelector("#lost-game");
+const wonRoundAudio = document.querySelector("#won-round");
+const lostRoundAudio = document.querySelector("#lost-round");
+const tieRoundAudio = document.querySelector("#tie-round");

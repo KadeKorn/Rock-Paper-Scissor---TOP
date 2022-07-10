@@ -4,101 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="code.js" defer></script>
 </head>
 <body>
-    <script>
-        let playerScore = 0;
-let computerScore = 0;
+    <div class="container-one">
+        <div class="page-header">
+            <a href="index.html"><img src="images/logo.png" alt="RPS Logo" id="header-logo"></a>
+            <div class=links>
+                <div class="dropdown">
+                    <a class=drop-link href="#" onclick="return false;">Game Rules</a>
+                    <div class="drop-content">
+                        <div>The familiar game of Rock, Paper, Scissors is played like this: at the same time, you and our esteemed computer will display one of three symbols: a rock, paper, or scissors. A rock beats scissors, scissors beat paper by cutting it, and paper beats rock by covering it. First to five wins. Naturally, whenever one player wins, the other loses.</div>
+                    </div>
+                </div>
+                
+                <a href="https://github.com/nms1s/rock-paper-scissors" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </div>
 
-// computer select function
-function computerPlay() {
+    <div class="container-two">
+        <div class="narrator-text">Welcome to the game! Please make your choice. 
+            <br> Our computer has already decided. <br> No cheating. We promise.</div>
+            
+        <div class="buttons">
+            <button class="btn" id="rock-btn">ROCK</button>
+            <button class="btn" id="paper-btn">PAPER</button>
+            <button class="btn" id="scissors-btn">SCISSORS</button>
+        </div>
+        <div id="score">SCORE</div>
+        <div class=animation-box>
+            <div id="box-left">
+                <img src="images/rock.png" alt="" class="fist-img">
+            </div>
+            <div id="box-right">
+                <img src="images/rock-inv.png" alt="" class="fist-img">
+            </div>
+            <audio src="sounds/won-game.wav" id="won-game"></audio>
+            <audio src="sounds/lost-game.wav " id="lost-game"></audio>
+            <audio src="sounds/won-round.wav" id="won-round"></audio>
+            <audio src="sounds/lost-round.wav " id="lost-round"></audio>
+            <audio src="sounds/tie-round.wav" id="tie-round"></audio>
+        </div>
+        <div class="names">
+            <div>YOU</div>
+            <div>COMPUTER</div>
+        </div>
+    </div>
 
-  const option = ['rock', 'paper', 'scissors'];
-
-  let random = Math.floor(Math.random() * 3);
-
-  return option[random];
-}
-
-
-// player select function
-function playerPlay() {
-
-  const input = prompt('Please enter input');
-
-  const option = input.toLowerCase();
-
-  return option;
-}
-
-
-
-
-// play 1 single round
-function playRound(playerSelection, computerSelection) {
-
-  if (playerSelection === computerSelection) {
-    return 'It is a tie';
-  }
-
-
-  if (playerSelection === 'rock') {
-
-    if (computerSelection === 'scissors') {
-      playerScore++;
-      return 'Player wins with rock';
-    } else if (computerSelection === 'paper') {
-      computerScore++;
-      return 'Computer wins with paper'
-    }
-  }
-
-  if (playerSelection === 'paper') {
-
-    if (computerSelection === 'rock') {
-      playerScore++;
-      return 'Player wins with paper';
-    } else if (computerSelection === 'scissors') {
-      computerScore++;
-      return 'Computer wins with scissors';
-    }
-  }
-
-  if (playerSelection === 'scissors') {
-
-    if (computerSelection === "paper") {
-      playerScore++;
-      return 'Player wins with scissors';
-    } else if (computerSelection === 'rock') {
-      computerScore++;
-      return 'Computer wins with rock';
-    }
-  }
-
-}
-
-// console.log(playRound(playerSelection, computerSelection));
-
-
-// game
-
-function game() {
-for (i = 0; i <= 5; i++) {
-    var playerSelection = playerPlay();
-    var computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
-    console.log('Computer: ' + computerSelection);
-    console.log('Player: ' + playerSelection);
-    console.log('Player: ' + playerScore);
-    console.log('Computer: ' + computerScore);
-}
-console.log('Final Player: ' + playerScore);
-console.log('Final Computer: ' + computerScore);
-
-}
-
-game();
-    </script>
+    <div class="container-three">
+        <div class="page-footer">Copyright © nms1s for The Odin Project 2022</div>
+    </div>
+    
 </body>
 </html>
