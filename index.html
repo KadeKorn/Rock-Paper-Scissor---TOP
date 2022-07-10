@@ -1,65 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="code.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <div class="container-one">
-        <div class="page-header">
-            <a href="index.html"><img src="images/logo.png" alt="RPS Logo" id="header-logo"></a>
-            <div class=links>
-                <div class="dropdown">
-                    <a class=drop-link href="#" onclick="return false;">Game Rules</a>
-                    <div class="drop-content">
-                        <div>The familiar game of Rock, Paper, Scissors is played like this: at the same time, you and our esteemed computer will display one of three symbols: a rock, paper, or scissors. A rock beats scissors, scissors beat paper by cutting it, and paper beats rock by covering it. First to five wins. Naturally, whenever one player wins, the other loses.</div>
-                    </div>
-                </div>
-                
-                <a href="https://github.com/nms1s/rock-paper-scissors" target="_blank">GitHub</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-two">
-        <div class="narrator-text">Welcome to the game! Please make your choice. 
-            <br> Our computer has already decided. <br> No cheating. We promise.</div>
-            
-        <div class="buttons">
-            <button class="btn" id="rock-btn">ROCK</button>
-            <button class="btn" id="paper-btn">PAPER</button>
-            <button class="btn" id="scissors-btn">SCISSORS</button>
-        </div>
-        <div id="score">SCORE</div>
-        <div class=animation-box>
-            <div id="box-left">
-                <img src="images/rock.png" alt="" class="fist-img">
-            </div>
-            <div id="box-right">
-                <img src="images/rock-inv.png" alt="" class="fist-img">
-            </div>
-            <audio src="sounds/won-game.wav" id="won-game"></audio>
-            <audio src="sounds/lost-game.wav " id="lost-game"></audio>
-            <audio src="sounds/won-round.wav" id="won-round"></audio>
-            <audio src="sounds/lost-round.wav " id="lost-round"></audio>
-            <audio src="sounds/tie-round.wav" id="tie-round"></audio>
-        </div>
-        <div class="names">
-            <div>YOU</div>
-            <div>COMPUTER</div>
-        </div>
-    </div>
-
+  <header id="headers">
+    <h1>Rock Paper Scissors</h1>
+    <h2>Which Instrument Will You Choose</h2>
+    <h3>First to 5 Wins!</h3>
+  </header>
+  <div class="narrator-text">Welcome to the game! Please make your choice.</div>
+    <div id="buttons">
+        <button class="btn btn-square" id="rock-Btn">
+          <div class="sign">🪨</div>
+        </button>
+        <button class="btn btn-square" id="paper-Btn">
+          <div class="sign">📜</div>
+        </button>
+        <button class="btn btn-square" id="scissors-Btn">
+          <div class="sign">✂️</div>
+        </button>
+      </div>
+      <div id="score">SCORE</div>
+      <div class="names">
+        <div class="you">YOU</div>
+        <div class="computer">COMPUTER</div>
+      </div>
+      </div>
     <div class="container-three">
-        <div class="page-footer">Copyright © nms1s for The Odin Project 2022</div>
+        <div class="page-footer">Copyright © KadeKorn for The Odin Project 2022</div>
     </div>
-    
+  <script src="script.js"></script> 
 </body>
+
 </html>
